@@ -107,7 +107,7 @@ public class Parser {
                         String[] split = tokens[3].split(",");
                         int x = Integer.parseInt(split[0]);
                         int y;
-                        if(split[1] != null && !split[1].equals("")) {
+                        if(split.length >= 2 && split[1] != null && !split[1].equals("")) {
                             y = Integer.parseInt(split[1]);
                         } else {
                             y = Integer.parseInt(tokens[4]);
@@ -125,13 +125,66 @@ public class Parser {
                     } catch (Exception e) {
                         String name = tokens[3];
                         int[] res = grid.findName(name);
-                        if (res[0] != -1 && res[1] != -1)
+                        if (res[0] != -1 && res[1] != -1) {
                             grid.assign(res[0], res[1], value);
-                        return DebugCodes.ASSIGN_CODE;
+                            return DebugCodes.ASSIGN_CODE;
+                        }
+                        else {
+                            System.out.println("2048> There is no tile like that.");
+                            System.err.println(-1);
+                            return DebugCodes.UNKNOWN_TILE_NAME;
+                        }
                     }
                 } catch (Exception e) {
-
+                    System.out.println("2048> Syntax error.\nExpected:\nASSIGN <VALUE> TO <X>,<Y>");
+                    System.err.println(-1);
+                    return DebugCodes.ASSIGN_SYNTAX_ERROR;
                 }
+            }
+
+            case "VALUE": {
+                if (!tokens[1].equals("IN")) {
+                    System.out.println("2048> Syntax error.\nExpected:\nVALUE IN <X>,<Y>");
+                    System.err.println(-1);
+                    return DebugCodes.VALUE_SYNTAX_ERROR;
+                }
+
+                try {
+                    String[] split = tokens[2].split(",");
+                    int x = Integer.parseInt(split[0]);
+                    int y;
+
+                    if (split.length >= 2 && split[1] != null && !split[1].equals("")) {
+                        y = Integer.parseInt(split[1]);
+                    } else {
+                        y = Integer.parseInt(tokens[3]);
+                    }
+                    
+                    if(x > 0 && x < 5 && y > 0 && y < 5){
+                        int val = grid.getGrid()[x-1][y-1].getValue();
+                        System.out.println("2048> Value is : " + val);
+                        return DebugCodes.VALUE_CODE;
+                    } else {
+                        System.out.println("2048> There is no tile like that. The tile co-ordinates must be in the range 1,2,3,4.");
+                        System.err.println(-1);
+                        return DebugCodes.INVALID_COORDINATES;
+                    }
+                    
+                } catch (Exception e) {
+                    String name = tokens[3];
+                    int[] res = grid.findName(name);
+                    if (res[0] != -1 && res[1] != -1) {
+                        int val = grid.getGrid()[res[0]][res[1]].getValue();
+                        System.out.println("2048> Value is : " + val);
+                        return DebugCodes.VALUE_CODE;
+                    } else {
+                        System.out.println("2048> There is no tile like that.");
+                        System.err.println(-1);
+                        return DebugCodes.UNKNOWN_TILE_NAME;
+                    }
+                    
+                }
+                
             }
         }
 

@@ -42,8 +42,12 @@ public class Main {
                     grid.print();
                     break;
                 }
+                case 7: {
+                    break;
+                }
                 case 9: {
                     System.out.println("2048> Thanks, assignment done.");
+                    grid.print();
                     break;
                 }
             }

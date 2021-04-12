@@ -9,6 +9,9 @@ public final class DebugCodes {
     public static final int UNKNOWN_TOKEN = 102;
     public static final int WRONG_DIRECTION = 103;
     public static final int INVALID_COORDINATES = 104;
+    public static final int ASSIGN_SYNTAX_ERROR = 105;
+    public static final int VALUE_SYNTAX_ERROR = 106;
+    public static final int UNKNOWN_TILE_NAME = 107;
 
     //SUCCESSFUL PARSES
     public static final int ADD_LEFT = 200;
@@ -30,6 +33,8 @@ public final class DebugCodes {
     public static final int DIV_RIGHT = 502;
     public static final int DIV_UP = 503;
     public static final int DIV_DOWN = 501;
+
+    public static final int VALUE_CODE = 700;
 
     public static final int ASSIGN_CODE = 900;
 }
