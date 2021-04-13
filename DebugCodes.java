@@ -3,6 +3,9 @@ public final class DebugCodes {
     private DebugCodes() {
     }
 
+    //EXIT CODE
+    public static final int EXIT_CODE = 0;
+
     //ERRORS
     public static final int NO_FULL_STOP = 100;
     public static final int LOWER_CASE = 101;

@@ -1,6 +1,6 @@
 public class Parser {
     
-    String[] validCommands = new String[]{"ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "LEFT", "RIGHT", "UP", "DOWN", "ASSIGN", "TO", "VAR", "IS", "VALUE", "IN", "PRINT."};
+    String[] validCommands = new String[]{"ADD", "SUBTRACT", "MULTIPLY", "DIVIDE", "LEFT", "RIGHT", "UP", "DOWN", "ASSIGN", "TO", "VAR", "IS", "VALUE", "IN", "PRINT.", "EXIT."};
 
     public Parser () {
     }
@@ -90,6 +90,10 @@ public class Parser {
             case "PRINT" : {
                 grid.printAllNames();
                 return 800;
+            }
+
+            case "EXIT" : {
+                return DebugCodes.EXIT_CODE;
             }
 
             case "ASSIGN" : {
