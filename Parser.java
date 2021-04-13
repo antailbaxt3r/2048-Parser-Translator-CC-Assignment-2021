@@ -17,19 +17,16 @@ public class Parser {
         } 
         if (flag) {
             System.out.println("2048> Sorry, I don't understand that.");
-            System.err.println(-1);
             return DebugCodes.UNKNOWN_TOKEN;
         }
 
         if (!s.equals(s.toUpperCase())) {
             System.out.println("2048> Syntax error.");
-            System.err.println(-1);
             return DebugCodes.LOWER_CASE;
         } 
 
         if (s.charAt(s.length() - 1) != '.') {
             System.out.println("2048> Command must end with full stop.");
-            System.err.println(-1);
             return DebugCodes.NO_FULL_STOP;
         }
 
@@ -46,7 +43,6 @@ public class Parser {
                     case "DOWN": return DebugCodes.ADD_DOWN;
                     default : {
                         System.out.println("2048> Invalid direction for command.\nExpected:\n<COMMAND> <LEFT/RIGHT/UP/DOWN>\n GOT " + tokens[1]);
-                        System.err.println(-1);
                         return DebugCodes.WRONG_DIRECTION;
                     }
                 }
@@ -60,7 +56,6 @@ public class Parser {
                     case "DOWN": return DebugCodes.SUB_DOWN;
                     default : {
                         System.out.println("2048> Invalid direction for command.\nExpected:\n<COMMAND> <LEFT/RIGHT/UP/DOWN>");
-                        System.err.println(-1);
                         return DebugCodes.WRONG_DIRECTION;
                     }
                 }
@@ -74,7 +69,6 @@ public class Parser {
                     case "DOWN": return DebugCodes.MUL_DOWN;
                     default : {
                         System.out.println("2048> Invalid direction for command.\nExpected:\n<COMMAND> <LEFT/RIGHT/UP/DOWN>");
-                        System.err.println(-1);
                         return DebugCodes.WRONG_DIRECTION;
                     }
                 }
@@ -88,7 +82,6 @@ public class Parser {
                     case "DOWN": return DebugCodes.DIV_DOWN;
                     default : {
                         System.out.println("2048> Invalid direction for command.\nExpected:\n<COMMAND> <LEFT/RIGHT/UP/DOWN>");
-                        System.err.println(-1);
                         return DebugCodes.WRONG_DIRECTION;
                     }
                 }
@@ -115,10 +108,10 @@ public class Parser {
 
                         if(x > 0 && x < 5 && y > 0 && y < 5){
                             grid.assign(x-1, y-1, value);
+                            System.out.println("2048> Thanks, assignment done.");
                             return DebugCodes.ASSIGN_CODE;
                         } else {
                             System.out.println("2048> There is no tile like that. The tile co-ordinates must be in the range 1,2,3,4.");
-                            System.err.println(-1);
                             return DebugCodes.INVALID_COORDINATES;
                         }
                         
@@ -127,17 +120,15 @@ public class Parser {
                         int[] res = grid.findName(name);
                         if (res[0] != -1 && res[1] != -1) {
                             grid.assign(res[0], res[1], value);
+                            System.out.println("2048> Thanks, assignment done.");
                             return DebugCodes.ASSIGN_CODE;
-                        }
-                        else {
+                        } else {
                             System.out.println("2048> There is no tile like that.");
-                            System.err.println(-1);
                             return DebugCodes.UNKNOWN_TILE_NAME;
                         }
                     }
                 } catch (Exception e) {
                     System.out.println("2048> Syntax error.\nExpected:\nASSIGN <VALUE> TO <X>,<Y>");
-                    System.err.println(-1);
                     return DebugCodes.ASSIGN_SYNTAX_ERROR;
                 }
             }
@@ -145,7 +136,6 @@ public class Parser {
             case "VALUE": {
                 if (!tokens[1].equals("IN")) {
                     System.out.println("2048> Syntax error.\nExpected:\nVALUE IN <X>,<Y>");
-                    System.err.println(-1);
                     return DebugCodes.VALUE_SYNTAX_ERROR;
                 }
 
@@ -166,7 +156,6 @@ public class Parser {
                         return DebugCodes.VALUE_CODE;
                     } else {
                         System.out.println("2048> There is no tile like that. The tile co-ordinates must be in the range 1,2,3,4.");
-                        System.err.println(-1);
                         return DebugCodes.INVALID_COORDINATES;
                     }
                     
@@ -179,7 +168,6 @@ public class Parser {
                         return DebugCodes.VALUE_CODE;
                     } else {
                         System.out.println("2048> There is no tile like that.");
-                        System.err.println(-1);
                         return DebugCodes.UNKNOWN_TILE_NAME;
                     }
                     

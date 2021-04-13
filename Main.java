@@ -46,7 +46,7 @@ public class Main {
                     break;
                 }
                 case 9: {
-                    System.out.println("2048> Thanks, assignment done.");
+                    System.out.println("2048> Current State: ");
                     grid.print();
                     break;
                 }
