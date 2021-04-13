@@ -15,6 +15,8 @@ public final class DebugCodes {
     public static final int ASSIGN_SYNTAX_ERROR = 105;
     public static final int VALUE_SYNTAX_ERROR = 106;
     public static final int UNKNOWN_TILE_NAME = 107;
+    public static final int KEYWORD_TILE_NAME = 108;
+    public static final int EMPTY_TILE = 109;
 
     //SUCCESSFUL PARSES
     public static final int ADD_LEFT = 200;
@@ -38,6 +40,8 @@ public final class DebugCodes {
     public static final int DIV_DOWN = 501;
 
     public static final int VALUE_CODE = 700;
+
+    public static final int NAMING_CODE = 800;
 
     public static final int ASSIGN_CODE = 900;
 }

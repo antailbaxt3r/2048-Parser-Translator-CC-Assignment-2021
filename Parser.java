@@ -18,11 +18,6 @@ public class Parser {
         if (flag) {
             System.out.println("2048> Sorry, I don't understand that.");
             return DebugCodes.UNKNOWN_TOKEN;
-        }
-
-        if (!s.equals(s.toUpperCase())) {
-            System.out.println("2048> Syntax error.");
-            return DebugCodes.LOWER_CASE;
         } 
 
         if (s.charAt(s.length() - 1) != '.') {
@@ -164,7 +159,7 @@ public class Parser {
                     }
                     
                 } catch (Exception e) {
-                    String name = tokens[3];
+                    String name = tokens[2];
                     int[] res = grid.findName(name);
                     if (res[0] != -1 && res[1] != -1) {
                         int val = grid.getGrid()[res[0]][res[1]].getValue();
@@ -177,6 +172,70 @@ public class Parser {
                     
                 }
                 
+            }
+
+            case "VAR": {
+                boolean f = true;
+                for (String x : validCommands) {
+                    if (tokens[1].equals(x)) {
+                        f = false;
+                        break;
+                    }
+                }
+                if (!f) {
+                    System.out.println("2048> No, a keyword cannot be a variable name.");
+                    return DebugCodes.KEYWORD_TILE_NAME;
+                }
+
+                if (!tokens[2].equals("IS")) {
+                    System.out.println("2048> Syntax Error.\nExpected:\nVAR <<variable name>> IS <X>,<Y>");
+                    return DebugCodes.KEYWORD_TILE_NAME;
+                }
+
+                try {
+                    String[] split = tokens[3].split(",");
+                    int x = Integer.parseInt(split[0]);
+                    int y;
+
+                    if (split.length >= 2 && split[1] != null && !split[1].equals("")) {
+                        y = Integer.parseInt(split[1]);
+                    } else {
+                        y = Integer.parseInt(tokens[4]);
+                    }
+                    
+                    if(x > 0 && x < 5 && y > 0 && y < 5){
+                        if (grid.getGrid()[x-1][y-1].getValue() != 0) {
+                            grid.getGrid()[x-1][y-1].addName(tokens[1]);
+                            System.out.println("2048> Thanks, naming done.");
+                            return DebugCodes.NAMING_CODE;
+                        } else {
+                            System.out.println("2048> Tile doesn't exist at that location.");
+                            return DebugCodes.EMPTY_TILE;
+                        }
+                    } else {
+                        System.out.println("2048> There is no tile like that. The tile co-ordinates must be in the range 1,2,3,4.");
+                        return DebugCodes.INVALID_COORDINATES;
+                    }
+                    
+                } catch (Exception e) {
+                    String name = tokens[2];
+                    int[] res = grid.findName(name);
+                    if (res[0] != -1 && res[1] != -1) {
+                        if (grid.getGrid()[res[0]][res[1]].getValue() != 0) {
+                            grid.getGrid()[res[0]][res[1]].addName(tokens[1]);
+                            System.out.println("2048> Thanks, naming done.");
+                            return DebugCodes.NAMING_CODE;
+                        } else {
+                            System.out.println("2048> Tile doesn't exist at that location.");
+                            return DebugCodes.EMPTY_TILE;
+                        }
+                    } else {
+                        System.out.println("2048> There is no tile like that.");
+                        return DebugCodes.UNKNOWN_TILE_NAME;
+                    }
+                    
+                }
+
             }
         }
 
