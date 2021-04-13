@@ -64,14 +64,13 @@ public class Grid {
             
             for (int j = 0; j < 3; j++) {
                 if (temp[j].getValue() != 0 && temp[j+1].getValue() != 0) {
-                    if (operation == '+') {
-                        temp[j].setValue(temp[j].getValue() + temp[j+1].getValue());
-                        temp[j].addName(temp[j+1].getNames());
-                        temp[j+1].setValue(0);
-                        temp[j+1].clearNames();
-                    }
-                    else if (temp[j].getValue() == temp[j+1].getValue()) {
+                    if (temp[j].getValue() == temp[j+1].getValue()) {
                         switch (operation) {
+                            case '+' : {
+                                temp[j].setValue(temp[j].getValue() + temp[j+1].getValue());
+                                temp[j].addName(temp[j+1].getNames());
+                                break;
+                            }
                             case '-' : {
                                 temp[j].setValue(temp[j].getValue() - temp[j+1].getValue());
                                 temp[j].addName(temp[j+1].getNames());
