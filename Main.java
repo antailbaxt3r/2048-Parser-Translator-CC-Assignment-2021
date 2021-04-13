@@ -15,7 +15,7 @@ public class Main {
 
         while (true) {
             System.out.print("----> ");
-            int code = parser.parse(sc.nextLine(), grid);
+            int code = parser.parse(sc.nextLine(), grid, 0);
             handler.handle(code, grid);
         }
     }
