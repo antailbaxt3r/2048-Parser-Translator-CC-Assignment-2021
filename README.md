@@ -64,3 +64,22 @@ Once inside the interactive shell, enter command ```EXIT.``` to stop the program
 - All commands are case sensitive and must end with full stops as per assignment requirements.
 
 - A complete list of all handled errors can be seen inside the ```DebugCodes.java``` file as all variable names were created with the aim to keep it readable and the meaning behind each variable apparant, much like actual industry code.
+
+# Assumptions and Implementation
+
+- Suppose a row is 4 2 2 4. Then SUBTRACT LEFT operation will result in 4 4 0 0 as the middle 2 tiles will get eliminated.
+
+- Any nested commands must use parantheses. For example:
+```java
+    ASSIGN (VALUE IN 1,2) TO 2,3.
+```
+
+- Stderr is printed on every command.
+
+- Stderr format is as follows: ```<Array of numbers representing matrix in row major form separated by space (\40)> <x1>,<y1>name1,name2,name3 <x2>,<y2>name4,name5``` and so on.
+
+- Every error prints ```-1``` to stderr.
+
+- Code runs from Main.java which calls Parser.java and Handler.java. The game engine runs in Grid.java. 
+
+- Zero valued tiles cannot be assigned names, but they can be given values after which they will accept variable names. 
