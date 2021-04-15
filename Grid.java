@@ -3,11 +3,16 @@ import java.util.*;
 public class Grid {
     
     private Tile[][] m;
+    private Tile[][] old;
 
     public Grid () {
         m = new Tile[4][4];
+        old = new Tile[4][4];
         for(int i = 0; i < 4; i++) 
-            for(int j = 0; j < 4; j++) m[i][j] = new Tile(0);
+            for(int j = 0; j < 4; j++) {
+                m[i][j] = new Tile(0);
+                old[i][j] = new Tile(0);
+            }
 
         Random random = new Random();
         m[random.nextInt(4)][random.nextInt(4)].setValue((random.nextFloat() > 0.5) ? 4 : 2);
@@ -73,7 +78,8 @@ public class Grid {
                             }
                             case '-' : {
                                 temp[j].setValue(temp[j].getValue() - temp[j+1].getValue());
-                                temp[j].addName(temp[j+1].getNames());
+                                temp[j].clearNames();
+                                temp[j+1].clearNames();
                                 break;
                             }
                             case '*' : {
@@ -151,5 +157,21 @@ public class Grid {
             for (int j = 0; j < 4; j++)
                 for (String name : m[i][j].getNames())  
                     System.out.println(i + ", " + j + " : " + name);
+    }
+
+    public boolean isChanged() {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (!m[i][j].isSameAs(old[i][j])) 
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public void copyToOld () {
+        for (int i = 0; i < 4; i++) 
+            for (int j = 0; j < 4; j++) 
+                old[i][j] = m[i][j];
     }
 }

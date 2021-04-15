@@ -65,6 +65,7 @@ public class Handler {
             System.err.println(-1);
             return;
         }
+
         Tile[][] m = grid.getGrid();
 
         String values = "";
@@ -73,12 +74,16 @@ public class Handler {
             for (int j = 0; j < 4; j++) {
                 values += m[i][j].getValue() + " ";
                 if (!m[i][j].getNames().isEmpty()) {
+                    names += (i+1) + "," + (j+1);
                     for (String n : m[i][j].getNames()) {
-                        names += (i+1) + "," + (j+1) + n;
+                        names += n + ',';
                     }
+                    names = names.substring(0, names.length()-1);
+                    names += " ";
                 }
             }
         }
         System.err.println(values + names);
+        
     }
 }

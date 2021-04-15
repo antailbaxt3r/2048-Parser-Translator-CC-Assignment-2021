@@ -33,4 +33,11 @@ public class Tile {
         names.clear();
     }
 
+    public boolean isSameAs (Tile o) {
+        if (o.getValue() != this.getValue ()) return false;
+        for (String n : o.getNames()) if (!this.getNames().contains(n)) return false;
+        for (String n : this.getNames()) if (!o.getNames().contains(n)) return false;
+        return true;
+    }
+
 }

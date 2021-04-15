@@ -6,6 +6,7 @@ public class Parser {
     }
 
     public int parse (String s, Grid grid, int internal) {
+        grid.copyToOld();
         String[] tokens1 = s.split(" ");
         boolean flag = true;
 
